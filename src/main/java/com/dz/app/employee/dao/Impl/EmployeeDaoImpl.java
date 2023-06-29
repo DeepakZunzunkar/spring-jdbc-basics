@@ -4,27 +4,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.dz.app.employee.dao.EmployeeDao;
 import com.dz.app.model.Employee;
 
+@Component("employeeDao")
 public class EmployeeDaoImpl implements EmployeeDao{
 
+	@Autowired
 	private JdbcTemplate template;
 	
 	@Override
 	public int save(Employee employee) {
-		
 		String query="insert into employee(ename,email,age,salary)"
 			 	  +" values (?,?,?,?)";
-	
 		int result =template.update(query,employee.getName(),employee.getEmail(),employee.getAge(),employee.getSalary());
-		
 		return result;
 	}
-
 		
 	@Override
 	public int update(Employee employee) {
@@ -65,7 +65,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
 	@Override
 	public List<Employee> getAll() {
-		
 		String query="select * from employee";
 		List<Employee> result =template.query(query,new RowMapperImpl());
 		return result;

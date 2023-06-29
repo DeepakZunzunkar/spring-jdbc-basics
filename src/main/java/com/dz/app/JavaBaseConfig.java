@@ -3,6 +3,7 @@ package com.dz.app;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -11,6 +12,7 @@ import com.dz.app.employee.dao.EmployeeDao;
 import com.dz.app.employee.dao.Impl.EmployeeDaoImpl;
 
 @Configuration
+@ComponentScan(basePackages="com.dz.app.employee.dao")
 public class JavaBaseConfig {
 
 	@Bean("ds")
@@ -31,10 +33,10 @@ public class JavaBaseConfig {
 		return jdbcTemplate;
 	}
 	
-	@Bean("employeeDao")
+	/*@Bean("employeeDao")
 	public EmployeeDao getEmployeeDao(){
 		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
 		employeeDaoImpl.setTemplate(getJdbcTemplate());
 		return employeeDaoImpl;
-	}
+	}*/
 }
